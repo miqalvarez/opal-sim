@@ -149,7 +149,7 @@ opal-sim/
 │   ├── cost/                      # Cost layer (opt-in "cost" config section)
 │   │   ├── cost_model.py          # stage_usage, gpu_instances, POLICIES (gpu_hour_rental),
 │   │   │                          # price_run / report_run_cost -> stage_N/opal_cost.json
-│   │   ├── plots.py               # cost-*.png next to opal_cost.json (breakdown, GPU busy CDF, sessions)
+│   │   ├── plots.py               # cost-*.pdf with -g (breakdown, GPU busy CDF, sessions)
 │   │   └── __main__.py            # python -m opal.cost <run_dir>: price a finished run
 │   │
 │   ├── workloads/                 # Workload generators
@@ -595,7 +595,7 @@ All in `opal/cost/cost_model.py`, as plain functions:
 - **Policy** - one function per cost method from a paper, registered in
   `POLICIES`; first one: `gpu_hour_rental` (whole instance-hours x instance price)
 - **Report** (`price_run`, `report_run_cost`) - `stage_N/opal_cost.json` (keys carry
-  units: `_usd`, `_s`, `_pct`) + console summary + `cost-*.png` plots (`plots.py`);
+  units: `_usd`, `_s`, `_pct`) + console summary + `cost-*.pdf` plots with `-g` (`plots.py`);
   `python -m opal.cost <run_dir>` prices a finished run offline
 - The cost is a lower bound (instances start/stop instantly, billed exactly);
   `cost.billing_increment_s` / `billing_minimum_s` add a cloud's billing rounding
